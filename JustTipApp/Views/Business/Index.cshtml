@@ -1,0 +1,26 @@
+@model IEnumerable<JustTipApp.Models.Business>
+@{
+    ViewBag.Title = "Businesses";
+}
+<h2>Businesses</h2>
+<p><a href="@Url.Action("Create", "Business")">Create New Business</a></p>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Business Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var business in Model)
+        {
+            <tr>
+                <td>@business.Name</td>
+                <td>
+                    <a href="@Url.Action("Manage", "Business", new { id = business.id })">Manage</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

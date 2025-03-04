@@ -1,0 +1,21 @@
+@model IDictionary<string, decimal>
+@{
+    ViewBag.Title = "Distribute Tips";
+}
+<h2>Distribute Tips</h2>
+<form method="post" action="@Url.Action("DistributeTips", "Business", new { id = ViewBag.BusinessId })">
+    <label>Total Tips (€):</label>
+    <input type="number" name="totalTips" step="0.01" required />
+    <button type="submit">Calculate Distribution</button>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <h3>Tip Distribution:</h3>
+    <ul>
+        @foreach (var tip in Model)
+        {
+            <li>@tip.Key: €@tip.Value</li>
+        }
+    </ul>
+}

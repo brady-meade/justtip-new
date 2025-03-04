@@ -1,0 +1,25 @@
+@model JustTipApp.Models.Business
+@{
+    ViewBag.Title = "Manage Business";
+}
+<h2>Manage @Model.Name</h2>
+<p>
+    <a href="@Url.Action("AddEmployee", "Business", new { id = Model.id })">Add Employee</a> |
+    <a href="@Url.Action("AssignShift", "Business", new { id = Model.id })">Assign Shift</a> |
+    <a href="@Url.Action("DistributeTips", "Business", new { id = Model.id })">Distribute Tips</a>
+</p>
+
+<h3>Employees</h3>
+@if (Model.Employees.Count == 0)
+{
+    <p>No employees added yet.</p>
+}
+else
+{
+    <ul>
+        @foreach (var employee in Model.Employees)
+        {
+            <li>@employee.Name (Shifts: @employee.GetShifts())</li>
+        }
+    </ul>
+}

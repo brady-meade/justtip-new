@@ -1,0 +1,20 @@
+@{
+    ViewBag.Title = "Add Employee";
+}
+<h2>Add Employee</h2>
+<!-- display success message if an employee was added successfully -->
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p style="color:green;">@ViewBag.Message</p>
+}
+<!-- display error message if there was an issue adding an employee -->
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <p style="color:red;">@ViewBag.Error</p>
+}
+<!-- form for adding a new employe -->
+<form method="post" action="@Url.Action("AddEmployee", "Business", new { id = ViewBag.BusinessId })">
+    <label>Employee Name:</label>
+    <input type="text" name="employeeName" required />
+    <button type="submit">Add Employee</button>
+</form>

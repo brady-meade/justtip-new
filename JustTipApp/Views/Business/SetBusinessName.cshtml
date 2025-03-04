@@ -1,0 +1,14 @@
+@{
+    ViewBag.Title = "Set Business Name";
+}
+<h2>Enter the Name of your business!!</h2>
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <p style="color: red;">@ViewBag.Error</p>
+}
+
+<form method="post">
+    <label for="businessName">Business Name:</label>
+    <input type="text" id="businessName" name="businessName" required />
+    <button type="submit">Create Business</button>
+</form>
