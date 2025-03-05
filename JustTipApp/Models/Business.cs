@@ -60,6 +60,12 @@ namespace JustTipApp.Models
             if (totalWorkedDays == 0) return new Dictionary<string, decimal>();
 
             var tipDistribution = new Dictionary<string, decimal>();
+
+            foreach (var employee in Employees)
+            {
+                tipDistribution[employee.Name] = 0m;
+            }
+
             foreach (var entry in workDays)
             {
                 Employee employee = entry.Key;
