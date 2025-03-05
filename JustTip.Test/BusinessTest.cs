@@ -51,5 +51,38 @@ namespace JustTip.Test
             Assert.AreEqual(50, distribution["Saburo Arasaka"], "Saburo Should get 50");
             Assert.AreEqual(0, distribution["Yorinobu Arasaka"], "Yori should get 0");
         }
+
+        [TestMethod]
+        public void No_Duplicate_Employees()
+        {
+            Business business = new Business("Arasaka");
+            business.AddEmployee("Saburo Arasaka");
+            Assert.ThrowsException<Exception>(() => business.AddEmployee("Saburo Arasaka"));
+        }
+
+        [TestMethod]
+        public void Cannot_Assign_Shift_To_Non_Existent_Employee()
+        {
+            Business business = new Business("Arasaka");
+            business.AddEmployee("Johnny Silverhand");
+            Assert.ThrowsException<Exception>(() => business.AssignShift("Saburo Arasaka", "2024-03-23"));
+        }
+
+        [TestMethod]
+        public void Cannot_Distribute_Tips_With_No_Shifts()
+        {
+            Business business = new Business("Arasaka");
+            business.AddEmployee("Saburo Arasaka");
+            business.AddEmployee("Johnny Silverhand");
+            decimal totalTips = 100;
+            var distribution = business.DistributeTips(totalTips);
+            Assert.AreEqual(0, distribution.Count);
+        }
+
+        [TestMethod]
+        public void Business_Name_Cannot_be_Empty()
+        {
+            Assert.ThrowsException<ArgumentException>(() => new Business(""));
+        }
     }
 }
